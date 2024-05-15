@@ -1,6 +1,5 @@
- cat budget-app-web.yaml
 # budget-app-web.yaml
-
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -39,6 +38,23 @@ spec:
     app: budget-app-web
   ports:
     - protocol: TCP
-      port: 3000  # Use a specific port for NodePort
+      port: 80
       targetPort: 3000
   type: NodePort
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: budget-app-web-ingress
+spec:
+  rules:
+  - host: 13.232.124.236  # Replace with your actual hostname
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: budget-app-web-service
+            port:
+              number: 80
