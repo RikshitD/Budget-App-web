@@ -11,6 +11,6 @@ spec:
     - name: repo-revision
       value: 'main'
     - name: image-name
-      value: 'budget-app'
+      value: 'budget-rails-app-web'
     - name: docker-hub-username
       value: 'rikshitd'
